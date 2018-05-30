@@ -73,7 +73,7 @@ class SessionForm extends React.Component {
         {this.props.errors.map((err, i) => {
           return (
             <li key={`error-${i}`}>
-              {error}
+              {err}
             </li>
           )
         })}
@@ -107,3 +107,6 @@ class SessionForm extends React.Component {
 }
 
 export default withRouter(SessionForm);
+
+//build out splash page class
+// need a div and a logo
