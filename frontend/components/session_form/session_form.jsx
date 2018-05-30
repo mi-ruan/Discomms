@@ -1,12 +1,12 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 
-class SessionForm extends React.component {
+class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '';
-      username: '';
+      email: '',
+      username: '',
       password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,12 +44,27 @@ class SessionForm extends React.component {
       )
     } else {
       return (
-        <h6 className="session-header">Welcome back!</h6>
-        <h6 className="session-subheader">
-          We're so excited to see you again!
-        </h6>
+        <div className="session-header-div">
+          <h6 className="session-header">Welcome back!</h6>
+          <h6 className="session-subheader">
+            We're so excited to see you again!
+          </h6>
+        </div>
       )
     };
+  }
+
+  footer() {
+    if (this.props.formType === "Signup"){
+      return this.props.navLink;
+    } else {
+      return (
+        <div className="session-footer-div">
+          <h6 className="session-footer">Need an account?</h6>
+          {this.props.navLink}
+        </div>
+      )
+    }
   }
 
   renderErrors() {
@@ -85,8 +100,10 @@ class SessionForm extends React.component {
         </label>
         <input className="session-submit" type="submit" value={this.props.formType} />
         </form>
+        {this.footer()}
       </div>
     )
   }
-
 }
+
+export default withRouter(SessionForm);
