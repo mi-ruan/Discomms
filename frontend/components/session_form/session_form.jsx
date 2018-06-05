@@ -56,7 +56,11 @@ class SessionForm extends React.Component {
 
   footer() {
     if (this.props.formType === "Signup"){
-      return this.props.navLink;
+      return (
+        <div className="session-footer-div">
+          {this.props.navLink}
+        </div>
+        );
     } else {
       return (
         <div className="session-footer-div">
