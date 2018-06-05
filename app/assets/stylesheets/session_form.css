@@ -1,3 +1,10 @@
+.splash-page {
+  background: url(https://media.giphy.com/media/7cTJ3gWVsoC08/giphy.gif);
+  background-color: white;
+  height: 100vh;
+  background-size: cover;
+}
+
 .session-form {
   position: fixed;
   top: 50%;
@@ -37,11 +44,11 @@
 }
 
 .session-header {
-  color: white;
+  color: rgb(180, 182, 185);
 }
 
 .session-subheader {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .session-footer {
