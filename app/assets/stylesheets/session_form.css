@@ -79,6 +79,7 @@ label {
   border-radius: 5px;
   background-color: rgb(49, 51, 57);
   padding-left: 10px;
+  font-size: 14px;
 }
 
 label input:hover {
@@ -105,4 +106,9 @@ input.session-submit {
 
 input.session-submit:hover {
   background-color: rgb(103, 123, 196);
+}
+
+.errors {
+  color: red;
+  font-size: 12px;
 }

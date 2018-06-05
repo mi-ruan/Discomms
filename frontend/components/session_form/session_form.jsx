@@ -38,9 +38,11 @@ class SessionForm extends React.Component {
   }
 
   header() {
-    if(this.props.formType === "SignUp"){
+    if(this.props.formType === "Signup"){
       return (
-        <h6 className="session-header">Create an account</h6>
+        <div className="session-header-div">
+          <h6 className="session-header">Create an account</h6>
+        </div>
       )
     } else {
       return (
@@ -73,7 +75,7 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     return (
-      <ul>
+      <ul className = "errors">
         {this.props.errors.map((err, i) => {
           return (
             <li key={`error-${i}`}>
