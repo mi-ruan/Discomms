@@ -1,0 +1,45 @@
+class Api::ServerController < ApplicationController
+
+  before_action :require_logged_in, only: [:create]
+
+  def create
+    @server = Server.new(server_params)
+    @server.owner_id = current_user.id
+    if @server.save
+      render :show
+    else
+      render json: {errors: @server.errors.full_messages}, status: 401
+    end
+  end
+
+  def show
+    @server = Server.find(params[:id])
+    render :show
+  end
+
+  def update
+    @server = current_user.servers.find(params[:id])
+    if @server.update(server_params)
+      render :show
+    else
+      render json: {errors: @server.errors.full_messages}, status: 401
+    end
+  end
+
+  def destroy
+    server = current_user.servers.find(params[:id])
+    if server
+      Server.delete(server)
+      render json: {}
+    else
+      render json: {}, status: 404
+    end
+  end
+
+  private
+
+  def server_params
+    params.require(:server).require(:name)
+  end
+
+end

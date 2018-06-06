@@ -5,8 +5,12 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
   attr_reader :password
 
-  has_many :servers
+  has_many :servers, dependent: :destory
+  has_many :subscriptions, dependent: :destroy
 
+  has_many :subscribed_servers,
+    through: :subscriptions,
+    source: :servers
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
