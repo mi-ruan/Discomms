@@ -1,12 +1,13 @@
 class Server < ApplicationRecord
   validates :name, :owner_id, presence: :true
 
-  belongs_to :user,
+  belongs_to :owner,
     foreign_key: :owner_id,
-    class_name: :user
+    primary_key: :id,
+    class_name: :User
 
   has_many :subscribers,
     through: :subscriptions,
-    source: :user
+    source: :owner
 
 end

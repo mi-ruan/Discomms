@@ -6,4 +6,4 @@ json.servers do
       json.partial! 'api/servers/server', server: server
     end
   end
-end 
+end

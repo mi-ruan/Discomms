@@ -5,8 +5,17 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
   attr_reader :password
 
-  has_many :servers, dependent: :destory
-  has_many :subscriptions, dependent: :destroy
+  has_many :servers,
+    foreign_key: :owner_id,
+    primary_key: :id,
+    class_name: :Server,
+    dependent: :destroy
+    
+  has_many :subscriptions,
+    foreign_key: :subscriber_id,
+    primary_key: :id,
+    class_name: :Subscription,
+    dependent: :destroy
 
   has_many :subscribed_servers,
     through: :subscriptions,

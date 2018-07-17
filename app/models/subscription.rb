@@ -3,8 +3,8 @@ class Subscription < ApplicationRecord
 
   belongs_to :user,
     foreign_key: :subscriber_id,
-    class_name: :user
+    class_name: :User
 
   belongs_to :server
-  
+
 end

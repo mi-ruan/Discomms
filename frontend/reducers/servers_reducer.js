@@ -1,10 +1,10 @@
 import { RECEIVE_SERVERS,
          RECEIVE_SERVER,
-         REMOVE_SERVER } from server_actions;
+         REMOVE_SERVER } from '../actions/server_actions';
 
 const serversReducer = (state = {}, action) => {
   Object.freeze(state);
-  switch (actions.type) {
+  switch (action.type) {
     case RECEIVE_SERVERS:
       return Object.assign({}, state, action.servers);
     case RECEIVE_SERVER:
