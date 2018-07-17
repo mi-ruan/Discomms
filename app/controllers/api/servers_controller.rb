@@ -1,4 +1,4 @@
-class Api::ServerController < ApplicationController
+class Api::ServersController < ApplicationController
 
   before_action :require_logged_in, only: [:create]
 
@@ -14,7 +14,7 @@ class Api::ServerController < ApplicationController
 
   def index
     @servers = current_user.servers
-    render :index 
+    render :index
   end
 
   def show
@@ -44,7 +44,7 @@ class Api::ServerController < ApplicationController
   private
 
   def server_params
-    params.require(:server).require(:name)
+    params.require(:server).permit(:name)
   end
 
 end

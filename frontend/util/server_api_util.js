@@ -10,9 +10,9 @@ export const fetchServer = id => {
   })
 }
 
-export const createServer = (server, userId) => {
+export const createServer = (server) => {
   return $.ajax({
-    url: `api/users/${userId}/servers`,
+    url: `api/users/${server.ownerId}/servers`,
     method: 'POST',
     data: {server}
   })

@@ -5,14 +5,15 @@ import {createServer} from '../../actions/server_actions';
 
 const mapStateToProps = state => {
   return {
+    userId: state.session.id,
     currentUser: state.entities.users[state.session.id],
-    servers: state.servers
+    servers: state.entities.servers,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createServer: (server => dispatch(createServer(server))),
+    createServer: (server) => dispatch(createServer(server)),
     logout: (() => dispatch(logout()))
   }
 }

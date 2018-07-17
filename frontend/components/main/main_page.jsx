@@ -1,12 +1,17 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Modal from 'react-responsive-modal';
 
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    state = {
-      open: false
+    this.state = {
+      open: false,
+      name: '',
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onOpenModal = this.onOpenModal.bind(this);
+    this.onCloseModal = this.onCloseModal.bind(this);
   }
 
   onOpenModal() {
@@ -17,16 +22,56 @@ class MainPage extends React.Component {
     this.setState({ open: false });
   };
 
+  handleSubmit(e){
+    e.preventDefault();
+    const createServer = {
+      name: this.state.name, ownerId: this.props.userId
+    };
+    debugger
+    this.props.createServer(createServer);
+  }
+
+  update(field) {
+    return e => this.setState({
+      [field]: e.currentTarget.value
+    });
+  }
+
   render() {
+    const { open } = this.state;
+    const userServers = this.props.currentUser.serverIds;
+    const serversMap = userServers.map(id => {
+      return (
+        <div key={id} className="server-list">
+          <Link to={`/servers/${id}`}
+          className="server-list-name">
+          {id}
+          </Link>
+        </div>
+      )
+    });
     return (
       <div>
-        <h6>Hello Body</h6>
+        <h6>{`Hello ${this.props.currentUser.username}`}</h6>
         <button onClick={this.onOpenModal}>Create Server</button>
-        <Modal open={open} onClose={this.onCloseModal} center>
-          <h2>Simple centered modal</h2>
+        <Modal open={open} onClose={this.onCloseModal} center
+        className="create-server-modal">
+          <form onSubmit={this.handleSubmit}>
+          <div className ="form-labels">
+            <label>
+              <input type="text" onChange={this.update("name")}
+                className="server-name"
+                value={this.state.name}/>
+            </label>
+          </div>
+          <input className="server-create" type="submit" value="Create Server" />
+          </form>
         </Modal>
         <button className="logout-button"
         onClick={() => this.props.logout()}>Log Out</button>
+        <ul>
+          {serversMap}
+        </ul>
       </div>
     )
   }

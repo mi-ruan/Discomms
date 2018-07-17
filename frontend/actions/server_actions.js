@@ -35,8 +35,8 @@ export const fetchServer = id => dispatch => {
   .then(server => dispatch(receiveServer(server)))
 )}
 
-export const createServer = (server, userId) => dispatch => {
-  return (ServerApiUtil.createServer(server, userId)
+export const createServer = server => dispatch => {
+  return (ServerApiUtil.createServer(server)
   .then(server => dispatch(receiveServer(server)))
 )}
 
