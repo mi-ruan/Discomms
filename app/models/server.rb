@@ -6,8 +6,10 @@ class Server < ApplicationRecord
     primary_key: :id,
     class_name: :User
 
+  has_many :subscriptions
+
   has_many :subscribers,
     through: :subscriptions,
-    source: :owner
+    source: :user
 
 end

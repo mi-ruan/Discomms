@@ -27,7 +27,6 @@ class MainPage extends React.Component {
     const createServer = {
       name: this.state.name, ownerId: this.props.userId
     };
-    debugger
     this.props.createServer(createServer);
   }
 
