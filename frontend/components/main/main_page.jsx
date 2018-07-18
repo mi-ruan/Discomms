@@ -14,6 +14,10 @@ class MainPage extends React.Component {
     this.onCloseModal = this.onCloseModal.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchServers();
+  }
+
   onOpenModal() {
     this.setState({ open: true });
   };
@@ -27,7 +31,9 @@ class MainPage extends React.Component {
     const createServer = {
       name: this.state.name, ownerId: this.props.userId
     };
-    this.props.createServer(createServer);
+    this.props.createServer(createServer)
+    .then(() => this.props.fetchServers())
+    .then(this.onCloseModal());
   }
 
   update(field) {
@@ -38,13 +44,13 @@ class MainPage extends React.Component {
 
   render() {
     const { open } = this.state;
-    const userServers = this.props.currentUser.serverIds;
-    const serversMap = userServers.map(id => {
+    const userServers = this.props.servers;
+    const serversMap = userServers.map(server => {
       return (
-        <div key={id} className="server-list">
-          <Link to={`/servers/${id}`}
+        <div key={server.id} className="server-list">
+          <Link to={`/servers/${server.id}`}
           className="server-list-name">
-          {id}
+          {server.name}
           </Link>
         </div>
       )

@@ -4,10 +4,10 @@ export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
 export const REMOVE_SERVER = "REMOVE_SERVER";
 
-export const receiveServers = servers => {
+export const receiveServers = payload => {
   return {
     type: RECEIVE_SERVERS,
-    servers
+    servers: payload.servers
   }
 }
 
