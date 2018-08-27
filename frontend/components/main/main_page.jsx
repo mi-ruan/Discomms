@@ -8,7 +8,7 @@ class MainPage extends React.Component {
     this.state = {
       open: false,
       name: '',
-      server: this.props.servers[0].id;
+      server: this.props.currentUser.serverIds[0]
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onOpenModal = this.onOpenModal.bind(this);
@@ -54,7 +54,7 @@ class MainPage extends React.Component {
     const serversMap = userServers.map(server => {
       return (
         <div key={server.id} className="server-list">
-          <button onClick={this.changeServer(server.id)}
+          <button onClick={() => this.changeServer(server.id)}
           className="server-list-name">
           {server.name}
           </button>
@@ -85,12 +85,14 @@ class MainPage extends React.Component {
             {serversMap}
           </ul>
         </nav>
-        <main className="server-display">
-          <ServerContainer props={this.state.server} />
-        </main>
       </div>
     )
   }
 }
 
 export default MainPage;
+
+
+<main className="server-display">
+  <ServerContainer props={this.state.server} />
+</main>
