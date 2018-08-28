@@ -5,6 +5,11 @@ class ServerPage extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    const {fetchServer, props} = this.props;
+    fetchServer(props);
+  }
+
   render() {
     const {server} = this.props;
     return (

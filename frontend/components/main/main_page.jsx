@@ -10,6 +10,7 @@ class MainPage extends React.Component {
       name: '',
       server: this.props.currentUser.serverIds[0]
     }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
