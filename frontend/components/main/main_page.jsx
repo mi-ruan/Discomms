@@ -85,14 +85,12 @@ class MainPage extends React.Component {
             {serversMap}
           </ul>
         </nav>
+        <main className="server-display">
+          <ServerContainer props={this.state.server} />
+        </main>
       </div>
     )
   }
 }
 
 export default MainPage;
-
-
-<main className="server-display">
-  <ServerContainer props={this.state.server} />
-</main>

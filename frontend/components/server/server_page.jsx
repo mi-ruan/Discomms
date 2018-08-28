@@ -9,7 +9,7 @@ class ServerPage extends React.Component {
     const {server} = this.props;
     return (
       <div>
-        <h2>{server}</h2>
+        <h2>{server.name}</h2>
       </div>
     )
   }
