@@ -63,12 +63,17 @@ class MainPage extends React.Component {
       )
     });
     return (
-      <div>
+      <div className="mainview">
         <nav className="navbar">
-          <h6>{`Hello ${this.props.currentUser.username}`}</h6>
-          <button onClick={this.onOpenModal}>Create Server</button>
+          <h6 className="main-name">{`Hello ${this.props.currentUser.username}`}</h6>
+          <nav className="servercontrol">
+            <button className="create-server" onClick={this.onOpenModal}>Create Server</button>
+            <button className="logout-button"
+            onClick={() => this.props.logout()}>Log Out</button>
+          </nav>
           <Modal open={open} onClose={this.onCloseModal} center
-          className="create-server-modal">
+          classNames={{modal: "create-server-modal",
+                      closeIcon: "create-server-close"}}>
             <form onSubmit={this.handleSubmit}>
             <div className ="form-labels">
               <label>
@@ -80,8 +85,6 @@ class MainPage extends React.Component {
             <input className="server-create" type="submit" value="Create Server" />
             </form>
           </Modal>
-          <button className="logout-button"
-          onClick={() => this.props.logout()}>Log Out</button>
           <ul>
             {serversMap}
           </ul>
