@@ -1,29 +1,22 @@
 import React from 'react';
 import ServerContainer from '../server/server_container';
 import Modal from 'react-responsive-modal';
+import {Route, Link, withRouter} from 'react-router-dom';
 
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    const initialServer = this.props.currentUser.serverIds[0];
     this.state = {
       open: false,
-      name: '',
-      server: initialServer
+      name: ''
     }
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
-    this.changeServer = this.changeServer.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchServers();
-  }
-
-  changeServer(e) {
-    this.setState({server: e});
   }
 
   onOpenModal() {
@@ -43,9 +36,7 @@ class MainPage extends React.Component {
     .then(this.onCloseModal())
     .then(this.props.fetchServers())
     .then(this.setState(
-      {name: '',
-      server: this.props.currentUser.serverIds
-      [this.props.currentUser.serverIds.length - 1]}));
+      {name: ''}));
   }
 
   update(field) {
@@ -60,10 +51,10 @@ class MainPage extends React.Component {
     const serversMap = userServers.map(server => {
       return (
         <div key={server.id} className="server-list">
-          <button onClick={() => this.changeServer(server.id)}
+          <Link to={`/server/${server.id}`}
           className="server-list-name">
           {server.name}
-          </button>
+          </Link>
         </div>
       )
     });
@@ -95,11 +86,12 @@ class MainPage extends React.Component {
           </ul>
         </nav>
         <main className="server-display">
-          <ServerContainer serverId={this.state.server} />
+          <Route path={`/server/:serverId`}
+          component={ServerContainer} />
         </main>
       </div>
     )
   }
 }
 
-export default MainPage;
+export default withRouter(MainPage);

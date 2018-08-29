@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
-
+import {withRouter} from 'react-router-dom';
 class ServerPage extends React.Component {
   constructor(props){
     super(props);
@@ -72,4 +72,4 @@ class ServerPage extends React.Component {
 
 }
 
-export default ServerPage;
+export default withRouter(ServerPage);
