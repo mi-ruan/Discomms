@@ -1,7 +1,7 @@
 import React from 'react';
 import ServerContainer from '../server/server_container';
 import Modal from 'react-responsive-modal';
-import {Route, Link, withRouter} from 'react-router-dom';
+import {Route, Link, withRouter, Redirect} from 'react-router-dom';
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -34,9 +34,7 @@ class MainPage extends React.Component {
     };
     this.props.createServer(createServer)
     .then(this.onCloseModal())
-    .then(this.props.fetchServers())
-    .then(this.setState(
-      {name: ''}));
+    .then(() => this.props.history.push('/'))
   }
 
   update(field) {

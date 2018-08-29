@@ -39,7 +39,7 @@ class ServerPage extends React.Component {
 
   removeServer() {
     this.props.deleteServer(this.props.server.id)
-    .then(this.setState({name: ''}))
+    .then(() => this.props.history.push('/'))
   }
 
   render() {
