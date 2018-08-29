@@ -5,10 +5,11 @@ import Modal from 'react-responsive-modal';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
+    const initialServer = this.props.currentUser.serverIds[0]
     this.state = {
       open: false,
       name: '',
-      server: this.props.currentUser.serverIds[0]
+      server: initialServer
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +40,9 @@ class MainPage extends React.Component {
       name: this.state.name, ownerId: this.props.userId
     };
     this.props.createServer(createServer)
-    .then(() => this.props.fetchServers())
+    .then(this.setState(
+      {server: this.props.currentUser.serverIds
+      [this.props.currentUser.serverIds.length - 1]}))
     .then(this.onCloseModal());
   }
 
@@ -82,7 +85,7 @@ class MainPage extends React.Component {
                   value={this.state.name}/>
               </label>
             </div>
-            <input className="server-create" type="submit" value="Create Server" />
+            <input className="server-modi" type="submit" value="Create Server" />
             </form>
           </Modal>
           <ul>
