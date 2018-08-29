@@ -4,8 +4,8 @@ import {fetchServer, updateServer, deleteServer} from '../../actions/server_acti
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    servers: state.entities.servers,
-    server: state.entities.servers[ownProps.props] || {name: ""}
+    servers: Object.values(state.entities.servers),
+    server: state.entities.servers[ownProps.serverId] || {name: ""}
   }
 }
 const mapDispatchToProps = dispatch => {

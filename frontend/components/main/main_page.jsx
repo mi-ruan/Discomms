@@ -5,7 +5,7 @@ import Modal from 'react-responsive-modal';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    const initialServer = this.props.currentUser.serverIds[0]
+    const initialServer = this.props.currentUser.serverIds[0];
     this.state = {
       open: false,
       name: '',
@@ -40,10 +40,12 @@ class MainPage extends React.Component {
       name: this.state.name, ownerId: this.props.userId
     };
     this.props.createServer(createServer)
+    .then(this.onCloseModal())
+    .then(this.props.fetchServers())
     .then(this.setState(
-      {server: this.props.currentUser.serverIds
-      [this.props.currentUser.serverIds.length - 1]}))
-    .then(this.onCloseModal());
+      {name: '',
+      server: this.props.currentUser.serverIds
+      [this.props.currentUser.serverIds.length - 1]}));
   }
 
   update(field) {
@@ -93,7 +95,7 @@ class MainPage extends React.Component {
           </ul>
         </nav>
         <main className="server-display">
-          <ServerContainer props={this.state.server} />
+          <ServerContainer serverId={this.state.server} />
         </main>
       </div>
     )
