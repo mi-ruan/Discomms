@@ -12,6 +12,7 @@ class ServerPage extends React.Component {
     this.onCloseModal = this.onCloseModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeServer = this.removeServer.bind(this);
+    this.editDeleteServer = this.editDeleteServer.bind(this);
   }
 
   handleSubmit(e){
@@ -31,6 +32,33 @@ class ServerPage extends React.Component {
     this.setState({ open: false });
   };
 
+  editDeleteServer() {
+    if (this.props.server.owner_id === this.props.currentUser.id) {
+      return (
+        <div>
+          <button className="edit-server"
+          onClick={this.onOpenModal}>Edit Server</button>
+          <button className="delete-server"
+          onClick={this.removeServer}>
+          Delete Server</button>
+          <Modal open={this.state.open} onClose={this.onCloseModal} center
+          classNames={{modal: "create-server-modal",
+                      closeIcon: "create-server-close"}}>
+            <form onSubmit={this.handleSubmit}>
+            <div className ="form-labels">
+              <label>
+                <input type="text" onChange={this.update("name")}
+                  className="server-name"
+                  value={this.state.name}/>
+              </label>
+            </div>
+            <input className="server-modi" type="submit" value="Edit Server" />
+            </form>
+          </Modal>
+        </div>
+    )}
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -47,25 +75,7 @@ class ServerPage extends React.Component {
     return (
       <div>
         <h2>{server.name}</h2>
-        <button className="edit-server"
-        onClick={this.onOpenModal}>Edit Server</button>
-        <button className="delete-server"
-        onClick={this.removeServer}>
-        Delete Server</button>
-        <Modal open={this.state.open} onClose={this.onCloseModal} center
-        classNames={{modal: "create-server-modal",
-                    closeIcon: "create-server-close"}}>
-          <form onSubmit={this.handleSubmit}>
-          <div className ="form-labels">
-            <label>
-              <input type="text" onChange={this.update("name")}
-                className="server-name"
-                value={this.state.name}/>
-            </label>
-          </div>
-          <input className="server-modi" type="submit" value="Edit Server" />
-          </form>
-        </Modal>
+        {this.editDeleteServer()}
       </div>
     )
   }
