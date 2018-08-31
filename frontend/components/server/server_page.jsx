@@ -15,6 +15,11 @@ class ServerPage extends React.Component {
     this.editDeleteServer = this.editDeleteServer.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.server.name !== "") {
+      this.props.fetchServer(this.props.server.id)};
+  }
+
   handleSubmit(e){
     e.preventDefault();
     const server = this.props.server;
@@ -72,6 +77,9 @@ class ServerPage extends React.Component {
 
   render() {
     const {server} = this.props;
+    const subscriberList = this.props.subscribers.map((subs) => {
+      return (<li key={subs.id} className="sub-list">{subs.username}</li>);
+    })
     return (
       <div>
         <h2>{server.name}</h2>

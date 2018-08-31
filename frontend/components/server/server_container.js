@@ -5,8 +5,10 @@ import {fetchServer, updateServer, deleteServer} from '../../actions/server_acti
 const mapStateToProps = (state, ownProps) => {
   return {
     servers: Object.values(state.entities.servers),
+    subscribers: Object.values(state.entities.users),
     currentUser: state.entities.users[state.session.id],
-    server: state.entities.servers[parseInt(ownProps.match.params.serverId)] || {name: ""}
+    server: state.entities.servers[parseInt(ownProps.match.params.serverId)]
+    || {name: ""}
   }
 }
 const mapDispatchToProps = dispatch => {
