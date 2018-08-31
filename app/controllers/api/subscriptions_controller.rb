@@ -4,7 +4,7 @@ class Api::SubscriptionsController < ApplicationController
     @server = Server.find({id: params[:server_id]})
     @subscription = @server.subscribers.new(subscriber_id: current_user.id)
     if @subscription.save
-      render "api/servers/#{@server}"
+      render :show
     end
   end
 
