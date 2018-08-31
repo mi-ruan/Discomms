@@ -17,9 +17,15 @@ const serversReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_SUBSCRIPTION:
       const newArrState = Object.assign({}, state);
-      const arrSub = newArrState[serverId].subscriberIds;
+      const arrSub = newArrState[action.serverId].subscriberIds;
       arrSub.push(subscriberId);
       return newArrState;
+    case REMOVE_SUBSCRIPTION:
+      const newArrR = Object.assign({}, state);
+      const arrSubR = newArrR[action.serverId].subscriberIds;
+      const arrSubIdx = arrSubR.indexOf(action.subscriberId);
+      arrSubR.splice(arrSubIdx, 1);
+      return newArrR;
     default:
       return state;
   }
