@@ -40,7 +40,7 @@ class ServerPage extends React.Component {
   editDeleteServer() {
     if (this.props.server.owner_id === this.props.currentUser.id) {
       return (
-        <div>
+        <div className="edit-delete-buttons">
           <button className="edit-server"
           onClick={this.onOpenModal}>Edit Server</button>
           <button className="delete-server"
@@ -82,10 +82,15 @@ class ServerPage extends React.Component {
       return (<li key={subs.id} className="sub-list">{subs.username}</li>);
     })
     return (
-      <div>
-        <h2>{server.name}</h2>
-        {this.editDeleteServer()}
-        {subscriberList}
+      <div className="server-page">
+        <main className="server-page-main">
+          <h2 className="server-page-title">{server.name}</h2>
+          {this.editDeleteServer()}
+        </main>
+        <nav className="server-page-subs">
+          <h2 className="server-page-sub-title">Subscribers</h2>
+          {subscriberList}
+        </nav>
       </div>
     )
   }
