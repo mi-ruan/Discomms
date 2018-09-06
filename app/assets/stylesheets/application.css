@@ -39,7 +39,7 @@ body {
  background-color: #FAFAFA;
 }
 
-ul {
+ul, li {
 list-style: none;
 }
 

@@ -6,7 +6,12 @@ class Api::ServersController < ApplicationController
     @server = Server.new(server_params)
     @server.owner_id = current_user.id
     if @server.save
-      render :show
+      subscription = Subscription.create(
+        {subscriber_id: current_user.id,
+          server_id: @server.id})
+      if subscription.save
+        render :show
+      end 
     else
       render json: {errors: @server.errors.full_messages}, status: 401
     end

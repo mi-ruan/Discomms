@@ -77,17 +77,18 @@ class ServerPage extends React.Component {
 
   render() {
     const {server} = this.props;
-    const subscriberList = this.props.subscribers.map((subs) => {
+    const subscribers = Object.values(this.props.subscribers);
+    const subscriberList = subscribers.map((subs) => {
       return (<li key={subs.id} className="sub-list">{subs.username}</li>);
     })
     return (
       <div>
         <h2>{server.name}</h2>
         {this.editDeleteServer()}
+        {subscriberList}
       </div>
     )
   }
-
 }
 
 export default withRouter(ServerPage);
