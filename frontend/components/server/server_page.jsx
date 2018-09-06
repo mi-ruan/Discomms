@@ -77,7 +77,9 @@ class ServerPage extends React.Component {
 
   render() {
     const {server} = this.props;
-    const subscribers = Object.values(this.props.subscribers);
+    const subscribers = Object.values(this.props.subscribers).filter((subs)=> {
+      return server.subscriberIds.includes(subs.id);
+    });
     const subscriberList = subscribers.map((subs) => {
       return (<li key={subs.id} className="sub-list">{subs.username}</li>);
     })
@@ -88,6 +90,7 @@ class ServerPage extends React.Component {
           {this.editDeleteServer()}
         </main>
         <nav className="server-page-subs">
+          <span className="square"></span>
           <h2 className="server-page-sub-title">Subscribers</h2>
           {subscriberList}
         </nav>

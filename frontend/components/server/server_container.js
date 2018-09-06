@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     subscribers: Object.values(state.entities.users),
     currentUser: state.entities.users[state.session.id],
     server: state.entities.servers[parseInt(ownProps.match.params.serverId)]
-    || {name: ""}
+    || {name: "", subscriberIds: []}
   }
 }
 const mapDispatchToProps = dispatch => {

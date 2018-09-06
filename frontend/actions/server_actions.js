@@ -7,7 +7,7 @@ export const REMOVE_SERVER = "REMOVE_SERVER";
 export const receiveServers = payload => {
   return {
     type: RECEIVE_SERVERS,
-    servers: payload.servers
+    servers: payload.servers || {}
   }
 }
 

@@ -5,14 +5,16 @@
 .main-name {
   margin: 10px;
   font-size: 24px;
-  color: #4B367C;
+  color: black;
 }
 
 .navbar {
-  margin-left: 5px;
   text-align: center;
   height: 100vh;
   border-right: 5px solid black;
+  color: #FAFAFA;
+  background-image: url(/assets/server_nav_background.jpg);
+  background-size: cover;
 }
 
 .servercontrol {

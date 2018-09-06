@@ -23,6 +23,7 @@ span, article, footer, time, small {
   border: 0;
   outline: 0;
   font: inherit;
+  font-family: 'Catamaran', sans-serif;
   color: inherit;
   text-align: inherit;
   text-decoration: inherit;
@@ -46,7 +47,6 @@ list-style: none;
 button, input[type="submit"] {
  cursor: pointer;
 }
-
 
 input[type="password"],
 input[type="email"],

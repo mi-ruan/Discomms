@@ -17,11 +17,18 @@
   width: 90%;
   display: flex;
   flex-direction: column;
+  background-image: url(/assets/server_background.jpg);
+  background-size: cover;
 }
 
 .server-page-subs {
+  margin-top: -10px;
+  width: 10%;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  background-image: url(/assets/sub_nav_background.jpg);
 }
 
 .edit-delete-buttons {
@@ -34,4 +41,14 @@
   font-weight: bold;
   color: #4B367C;
   align-content: center;
+}
+
+.server-page-sub-title {
+  font-size: 2vw;
+}
+
+.square {
+  height: 15%;
+  width: 100%;
+  background-color: #4B367C;
 }
