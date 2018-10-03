@@ -47,6 +47,10 @@
   font-size: 2vw;
 }
 
+.server-name {
+  border: 1px solid black;
+}
+
 .square {
   height: 15%;
   width: 100%;
