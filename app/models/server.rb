@@ -12,4 +12,7 @@ class Server < ApplicationRecord
     through: :subscriptions,
     source: :user
 
+  has_many :channels
+    dependent: :destroy
+
 end
