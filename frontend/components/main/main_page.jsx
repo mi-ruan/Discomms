@@ -1,5 +1,6 @@
 import React from 'react';
 import ServerContainer from '../server/server_container';
+import ServerSearchContainer from '../server_search/server_search_container';
 import Modal from 'react-responsive-modal';
 import {Route, Link, withRouter, Redirect} from 'react-router-dom';
 
@@ -79,6 +80,7 @@ class MainPage extends React.Component {
             <input className="server-modi" type="submit" value="Create Server" />
             </form>
           </Modal>
+          <ServerSearchContainer />
           <ul>
             {serversMap}
           </ul>
