@@ -22,14 +22,14 @@ class ServerSearchPage extends React.Component {
   render() {
     return (
       <div>
-        <input className="server-search"
+        <button className="server-search"
         placeholder="search here"
-        onClick={this.onOpenModal}></input>
+        onClick={this.onOpenModal}></button>
         <Modal open={this.state.open} onClose={this.onCloseModal}
         classNames={{modal: "server-search-modal",
                     closeIcon: "create-server-close"}}>
         </Modal>
-      </div>                          
+      </div>
     )
   }
 }

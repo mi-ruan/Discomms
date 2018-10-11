@@ -11,7 +11,7 @@ class Api::ServersController < ApplicationController
           server_id: @server.id})
       if subscription.save
         render :show
-      end 
+      end
     else
       render json: {errors: @server.errors.full_messages}, status: 401
     end
@@ -19,6 +19,11 @@ class Api::ServersController < ApplicationController
 
   def index
     @servers = current_user.servers
+    render :index
+  end
+
+  def all
+    @servers = Server.all
     render :index
   end
 
