@@ -1,5 +1,7 @@
 import {connect} from 'react-redux';
 import ServerSearchPage from './server_search_page';
+import {fetchAllServers} from '../../actions/server_actions';
+import {createSubscription} from '../../actions/subscription_actions';
 
 const mapStateToProps = state => {
   return {
@@ -9,7 +11,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-
+  return {
+    fetchServers: () => dispatch(fetchAllServers()),
+    createSubscription: serverId => dispatch(createSubscription(serverId))
+  }
 }
 
-export default connect(mapStateToProps, null)(ServerSearchPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ServerSearchPage);

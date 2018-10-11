@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :servers, only: :create
     end
     resources :servers, only: [:show, :index, :update, :destroy] do
-      get :all
+      get :all, on: :collection
       resources :channels
       resources :subscriptions, only: [:create, :destroy]
     end

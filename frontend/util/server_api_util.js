@@ -4,6 +4,12 @@ export const fetchServers = () => {
   })
 }
 
+export const fetchAllServers = () => {
+  return $.ajax({
+    url: `api/servers/all`
+  })
+}
+
 export const fetchServer = id => {
   return $.ajax({
     url: `api/servers/${id}`

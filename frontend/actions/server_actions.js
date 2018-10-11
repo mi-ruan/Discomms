@@ -30,6 +30,11 @@ export const fetchServers = () => dispatch => {
   .then(servers => dispatch(receiveServers(servers)))
 )}
 
+export const fetchAllServers = () => dispatch => {
+  return (ServerApiUtil.fetchAllServers()
+  .then(servers => dispatch(receiveServers(servers)))
+)}
+
 export const fetchServer = id => dispatch => {
   return (ServerApiUtil.fetchServer(id)
   .then(server => dispatch(receiveServer(server)))
