@@ -1,7 +1,7 @@
 class Api::SubscriptionsController < ApplicationController
 
   def create
-    @server = Server.find({id: params[:server_id]})
+    @server = Server.find(params[:server_id])
     @subscription = @server.subscribers.new(subscriber_id: current_user.id)
     if @subscription.save
       render :show

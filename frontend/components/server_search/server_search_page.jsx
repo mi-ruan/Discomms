@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
+import {withRouter} from 'react-router-dom';
 import Dropdown, {DropdownTrigger, DropdownContent} from 'react-simple-dropdown';
 
 class ServerSearchPage extends React.Component {
@@ -8,13 +9,15 @@ class ServerSearchPage extends React.Component {
     this.state = {
       open: false,
       serverName: '',
+      selectedServerId: null,
     }
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDropdown = this.handleDropdown.bind(this);
     this.matches = this.matches.bind(this);
-    this.updateTitle = this.updateTitle.bind(this);
+    this.updateName = this.updateName.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   onOpenModal() {
     this.setState({open: true});
@@ -43,9 +46,11 @@ class ServerSearchPage extends React.Component {
       e.preventDefault();
       const matchers = this.matches();
       if (matchers.length === 0 || matchers[0].name === "No Results"){
-        this.setState({serverName: ''});
+        this.setState({serverName: '',
+                      selectedServerId: null});
       } else {
-        this.setState({serverName: `${matchers[0].name}`})
+        this.setState({serverName: `${matchers[0].name}`,
+                        selectedServerId: `${matchers[0].id}`});
       }
     }
   }
@@ -65,16 +70,28 @@ class ServerSearchPage extends React.Component {
     )
   }
 
-  updateTitle(e) {
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({selectedServerId: `${this.matches()[0].id}`})
+    if (this.state.selectedServerId == null ||
+      this.props.currentUser.servers.values.includes(this.state.selectedServerId)) {
+      this.onCloseModal()
+    } else {
+      this.props.createSubscription(this.state.selectedServerId)
+      .then(this.onCloseModal())
+      .then(this.props.history.push(`/server/${this.state.selectedServerId}`))
+    }
+  }
+
+  updateName(e) {
     this.setState({serverName: e.target.value});
   }
 
   render() {
     return (
       <div>
-        <input className="server-search"
-        placeholder="search here"
-        onClick={this.onOpenModal}></input>
+        <h6 className="server-search"
+        onClick={this.onOpenModal}>search here</h6>
         <Modal open={this.state.open} onClose={this.onCloseModal}
         classNames={{modal: "server-search-modal",
                     closeIcon: "create-server-close"}}>
@@ -83,13 +100,13 @@ class ServerSearchPage extends React.Component {
           <DropdownTrigger className="server-search-trigger">
           <input type="text" className="server-search"
             placeholder="enter server here"
-            onChange={this.updateTitle}
-            value = {this.state.title} />
+            onChange={this.updateName}
+            value = {this.state.serverName} />
           </DropdownTrigger>
             <DropdownContent>
               {this.handleDropdown()}
             </DropdownContent>
-            <button className="join-server">Join Server</button>
+            <button onClick={this.handleSubmit} className="join-server">Join Server</button>
         </Dropdown>
         </form>
         </Modal>
@@ -98,4 +115,4 @@ class ServerSearchPage extends React.Component {
   }
 }
 
-export default ServerSearchPage;
+export default withRouter(ServerSearchPage);
