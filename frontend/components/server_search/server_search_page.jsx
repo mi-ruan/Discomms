@@ -18,6 +18,7 @@ class ServerSearchPage extends React.Component {
     this.matches = this.matches.bind(this);
     this.updateName = this.updateName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   onOpenModal() {
     this.setState({open: true});
@@ -49,8 +50,8 @@ class ServerSearchPage extends React.Component {
         this.setState({serverName: '',
                       selectedServerId: null});
       } else {
-        this.setState({serverName: `${matchers[0].name}`,
-                        selectedServerId: `${matchers[0].id}`});
+        this.setState({serverName: matchers[0].name,
+                        selectedServerId: matchers[0].id});
       }
     }
   }
@@ -58,9 +59,11 @@ class ServerSearchPage extends React.Component {
   handleDropdown() {
     let results = this.matches().map((result, key) => {
       if (result.id) {
-        return <li key={key}>{result.name}</li>;
+        return (<li key={key}>{result.name}</li>);
       } else {
-        return <li key='result' className='search-no-result'>{result.name}</li>
+        return <li key="result"
+        className="search-no-result"
+        >{result.name}</li>;
       }
     });
     return (
@@ -70,17 +73,23 @@ class ServerSearchPage extends React.Component {
     )
   }
 
+  handleClick(result){
+    this.setState({serverName: result.name,
+                  selectedServerId: result.id});
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({selectedServerId: `${this.matches()[0].id}`})
-    if (this.state.selectedServerId == null ||
-      this.props.currentUser.servers.values.includes(this.state.selectedServerId)) {
-      this.onCloseModal()
-    } else {
-      this.props.createSubscription(this.state.selectedServerId)
-      .then(this.onCloseModal())
-      .then(this.props.history.push(`/server/${this.state.selectedServerId}`))
-    }
+    this.setState({selectedServerId: this.matches()[0].id}, () => {
+      if (this.state.selectedServerId == null ||
+        this.props.currentUser.serverIds.includes(this.state.selectedServerId)) {
+        this.onCloseModal();
+      } else {
+        this.props.createSubscription(this.state.selectedServerId)
+        .then(this.onCloseModal())
+        .then(this.props.history.push(`/server/${this.state.selectedServerId}`))
+      }
+    })
   }
 
   updateName(e) {

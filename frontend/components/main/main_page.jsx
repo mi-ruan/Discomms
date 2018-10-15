@@ -47,7 +47,7 @@ class MainPage extends React.Component {
   render() {
     const { open } = this.state;
     const userServers = this.props.servers.filter(server =>
-      server.owner_id === this.props.userId);
+      server.subscriberIds.includes(this.props.userId));
     const serversMap = userServers.map(server => {
       return (
         <div key={server.id} className="server-list">

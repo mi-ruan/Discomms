@@ -8,7 +8,7 @@ const serversReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_SERVERS:
-      return action.servers;
+      return Object.assign({}, state, action.servers);
     case RECEIVE_SERVER:
       return Object.assign({}, state, {[action.server.id]: action.server});
     case REMOVE_SERVER:
@@ -18,7 +18,7 @@ const serversReducer = (state = {}, action) => {
     case RECEIVE_SUBSCRIPTION:
       const newArrState = Object.assign({}, state);
       const arrSub = newArrState[action.serverId].subscriberIds;
-      arrSub.push(subscriberId);
+      arrSub.push(action.subscriberId);
       return newArrState;
     case REMOVE_SUBSCRIPTION:
       const newArrR = Object.assign({}, state);
