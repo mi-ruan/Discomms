@@ -24,7 +24,7 @@ class Api::ServersController < ApplicationController
 
   def all
     @servers = Server.all
-    render :index
+    render :all
   end
 
   def show
