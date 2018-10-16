@@ -63,12 +63,12 @@ class ServerSearchPage extends React.Component {
           className="search-server-item">{result.name}</li>);
       } else {
         return <li key="result"
-        className="search-no-result"
+        className="search-server-item"
         >{result.name}</li>;
       }
     });
     return (
-      <ul>
+      <ul className="search-server-list">
         {results}
       </ul>
     )
@@ -102,24 +102,24 @@ class ServerSearchPage extends React.Component {
   render() {
     return (
       <div>
-        <h6 className="server-search"
+        <h6 className="server-search-text"
         onClick={this.onOpenModal}>search here</h6>
         <Modal open={this.state.open} onClose={this.onCloseModal}
         classNames={{modal: "server-search-modal",
-                    closeIcon: "create-server-close"}}>
-        <form onKeyPress={this.handleKeyPress}>
-        <Dropdown className="server-search-dropdown" ref="dropdown">
-          <DropdownTrigger className="server-search-trigger">
-          <input type="text" className="server-search"
-            placeholder="enter server here"
-            onChange={this.updateName}
-            value = {this.state.serverName} />
-          </DropdownTrigger>
+                    closeIcon: "server-search-close"}}>
+        <form onKeyPress={this.handleKeyPress} className="server-search-form">
+          <Dropdown className="server-search-dropdown" ref="dropdown">
+            <DropdownTrigger className="server-search-trigger">
+            <input type="text" className="server-search"
+              placeholder="enter server here"
+              onChange={this.updateName}
+              value = {this.state.serverName} />
+            </DropdownTrigger>
             <DropdownContent>
               {this.handleDropdown()}
             </DropdownContent>
+          </Dropdown>
             <button onClick={this.handleSubmit} className="join-server">Join Server</button>
-        </Dropdown>
         </form>
         </Modal>
       </div>
