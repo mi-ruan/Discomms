@@ -59,7 +59,8 @@ class ServerSearchPage extends React.Component {
   handleDropdown() {
     let results = this.matches().map((result, key) => {
       if (result.id) {
-        return (<li key={key}>{result.name}</li>);
+        return (<li key={key} onClick={()=>this.handleClick(result)}
+          className="search-server-item">{result.name}</li>);
       } else {
         return <li key="result"
         className="search-no-result"
@@ -81,13 +82,15 @@ class ServerSearchPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({selectedServerId: this.matches()[0].id}, () => {
-      if (this.state.selectedServerId == null ||
-        this.props.currentUser.serverIds.includes(this.state.selectedServerId)) {
+      const serverId = this.state.selectedServerId
+      if (serverId == null ||
+        this.props.currentUser.serverIds.includes(serverId)) {
         this.onCloseModal();
       } else {
-        this.props.createSubscription(this.state.selectedServerId)
+        this.props.createSubscription(serverId)
         .then(this.onCloseModal())
-        .then(this.props.history.push(`/server/${this.state.selectedServerId}`))
+        .then(this.props.history.push(`/server/${serverId}`))
+        .then(this.props.fetchServer(serverId))
       }
     })
   }

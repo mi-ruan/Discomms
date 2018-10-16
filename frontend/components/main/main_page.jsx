@@ -9,7 +9,8 @@ class MainPage extends React.Component {
     super(props);
     this.state = {
       open: false,
-      name: ''
+      name: '',
+      newServer: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onOpenModal = this.onOpenModal.bind(this);
@@ -35,7 +36,8 @@ class MainPage extends React.Component {
     };
     this.props.createServer(createServer)
     .then(this.onCloseModal())
-    .then(() => this.props.history.push('/'))
+    .then(() => this.props.history.push(`/`))
+    .then(() => this.setState({newServer: true}))
   }
 
   update(field) {
@@ -46,7 +48,8 @@ class MainPage extends React.Component {
 
   render() {
     const { open } = this.state;
-    const userServers = this.props.servers.filter(server =>
+    const { servers } = this.props;
+    const userServers = servers.filter(server =>
       server.subscriberIds.includes(this.props.userId));
     const serversMap = userServers.map(server => {
       return (
@@ -89,6 +92,13 @@ class MainPage extends React.Component {
         <main className="server-display">
           <Route path={`/server/:serverId`}
           component={ServerContainer} />
+          <Route exact path="/" render={() => (
+            (this.state.newServer) ? (
+              <Redirect to={`/server/${servers[servers.length - 1].id}`} />
+            ) : (
+              <Route />
+            )
+          )}/>
         </main>
       </div>
     )
