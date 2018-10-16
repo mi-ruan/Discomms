@@ -11,10 +11,11 @@ export const receiveServers = payload => {
   }
 }
 
-export const receiveServer = server => {
+export const receiveServer = payload => {
   return {
     type: RECEIVE_SERVER,
-    server
+    server: payload.server,
+    subcribers: payload.subscribers
   }
 }
 
