@@ -17,8 +17,7 @@ class ServerPage extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.server.name !== "") {
-      this.props.fetchServer(this.props.server.id)};
+    this.props.fetchServer(this.props.server.id);
   }
 
   handleSubmit(e){

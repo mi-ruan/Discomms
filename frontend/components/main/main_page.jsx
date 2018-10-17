@@ -2,7 +2,7 @@ import React from 'react';
 import ServerContainer from '../server/server_container';
 import ServerSearchContainer from '../server_search/server_search_container';
 import Modal from 'react-responsive-modal';
-import {Route, Link, withRouter, Redirect} from 'react-router-dom';
+import {Route, Link, withRouter, Redirect, Switch} from 'react-router-dom';
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -90,6 +90,7 @@ class MainPage extends React.Component {
           </ul>
         </nav>
         <main className="server-display">
+          <Switch>
           <Route path={`/server/:serverId`}
           component={ServerContainer} />
           <Route exact path="/" render={() => (
@@ -99,6 +100,7 @@ class MainPage extends React.Component {
               <Route />
             )
           )}/>
+          </Switch>
         </main>
       </div>
     )

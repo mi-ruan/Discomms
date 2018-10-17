@@ -6,7 +6,8 @@ class Server < ApplicationRecord
     primary_key: :id,
     class_name: :User
 
-  has_many :subscriptions
+  has_many :subscriptions,
+    dependent: :destroy
 
   has_many :subscribers,
     through: :subscriptions,
