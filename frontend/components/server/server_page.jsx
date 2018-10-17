@@ -21,6 +21,12 @@ class ServerPage extends React.Component {
     this.props.fetchServer(this.props.server.id);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.server.id !== prevProps.server.id) {
+      this.props.fetchServer(this.props.server.id);
+    }
+  }
+
   handleSubmit(e){
     e.preventDefault();
     const server = this.props.server;
