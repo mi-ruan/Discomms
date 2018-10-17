@@ -13,6 +13,7 @@ class ServerPage extends React.Component {
     this.onCloseModal = this.onCloseModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeServer = this.removeServer.bind(this);
+    this.leaveServer = this.leaveServer.bind(this);
     this.editDeleteServer = this.editDeleteServer.bind(this);
   }
 
@@ -61,13 +62,22 @@ class ServerPage extends React.Component {
             </form>
           </Modal>
         </div>
-    )}
+    )} else {
+      return (<button className="leave-server" onClick={this.leaveServer}>
+      Leave Server</button>);
+    }
   }
 
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
+  }
+
+  leaveServer() {
+    const {server, currentUser} = this.props;
+    this.props.deleteSubscription(server.id, currentUser.id)
+    .then(() => this.props.history.push('/'))
   }
 
   removeServer() {

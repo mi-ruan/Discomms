@@ -51,6 +51,11 @@
   border: 1px solid black;
 }
 
+.edit-server:hover, .delete-server:hover, .leave-server:hover {
+  font-weight: bold;
+  color: red;
+}
+
 .square {
   height: 15%;
   width: 100%;

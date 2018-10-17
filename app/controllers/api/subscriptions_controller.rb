@@ -9,10 +9,11 @@ class Api::SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription = Subscription.find_by({id: id})
+    @subscription = Subscription.find_by({
+      server_id: params[:server_id],
+      subscriber_id: params[:id]})
     if @subscription
       Subscription.delete(@subscription)
-      render "api/users/#{current_user}"
     end
   end
 end

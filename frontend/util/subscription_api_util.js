@@ -5,9 +5,9 @@ export const createSub = serverId => {
   })
 }
 
-export const deleteSub = (serverId,id) => {
+export const deleteSub = (serverId,userId) => {
   return $.ajax({
-    url: `api/servers/${serverId}/subscriptions/${id}`,
+    url: `api/servers/${serverId}/subscriptions/${userId}`,
     method: 'DELETE'
   })
 }

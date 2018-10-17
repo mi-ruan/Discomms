@@ -11,9 +11,10 @@ export const receiveSubcription = payload => {
   };
 };
 
-export const removeSubscription = userId => {
+export const removeSubscription = (serverId, userId) => {
   return {
     type: REMOVE_SUBSCRIPTION,
+    serverId,
     userId
   };
 };
@@ -23,7 +24,7 @@ export const createSubscription = serverId => dispatch => {
   .then(subscription => dispatch(receiveSubcription(subscription))))
 }
 
-export const deleteSubscription = (serverId, userId) => {
+export const deleteSubscription = (serverId, userId) => dispatch => {
   return (SubscriptionApiUtil.deleteSub(serverId, userId)
-  .then(() => dispatch(removeSubscription(userId))))
+  .then(() => dispatch(removeSubscription(serverId, userId))))
 }
